@@ -1,3 +1,52 @@
-[gd_scene format=3 uid="uid://qa4skn1ygcr3"]
+[gd_scene load_steps=7 format=3 uid="uid://qa4skn1ygcr3"]
+
+[ext_resource type="Script" uid="uid://c0s6pnci7q5i0" path="res://wui.gd" id="1_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://b4es1xa426kr2" path="res://images/ruiPlaceholder.png" id="1_ig7tw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
+size = Vector3(57.354065, 0.5252838, 53.22644)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ig7tw"]
+size = Vector3(3.1809082, 2.925537, 0.032714844)
+
+[sub_resource type="Environment" id="Environment_0xm2m"]
+ambient_light_color = Color(0.70796657, 0.7079665, 0.7079665, 1)
+fog_light_color = Color(0.2756478, 0.30177724, 0.34243244, 1)
 
 [node name="Node3D" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12973022, -0.2373581, -0.94366455)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(53.626877, 0, 0, 0, -0.028590083, 0, 0, 0, 50.10586, 0, 0, 0)
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="wui" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17923963, 0)
+script = ExtResource("1_0xm2m")
+
+[node name="Sprite3D" type="Sprite3D" parent="wui"]
+transform = Transform3D(0.13593394, 0, 0, 0, 0.13282943, 0, 0, 0, 1, 0, 1.7231894, 0)
+texture = ExtResource("1_ig7tw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="wui"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04354, 1.800415, -0.021728516)
+shape = SubResource("BoxShape3D_ig7tw")
+
+[node name="head" type="Node3D" parent="wui"]
+
+[node name="Camera3D" type="Camera3D" parent="wui/head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3515806, -0.044355392)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="wui"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.52788424, 1.5215654, -0.20746958)
+spot_angle = 13.23174
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0xm2m")
